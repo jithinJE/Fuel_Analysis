@@ -2,6 +2,9 @@ import paho.mqtt.client as mqtt
 from sklearn.externals import joblib
 from sklearn.preprocessing import PolynomialFeatures
 
+broker="localhost"
+port=1883
+keepalive = 60
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -46,7 +49,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("localhost", 1883, 60)
+client.connect(broker, port, keepalive)
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
